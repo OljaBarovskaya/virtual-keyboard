@@ -20,7 +20,7 @@
   }
 
 .keyboard-input {
-    width: 990px;
+    resize: none;
     margin: 0 auto;
     display: block;
 }

@@ -1,0 +1,93 @@
+[
+  {
+    "eventCode": "Backquote",
+    "enNoShift": "`",
+    "enShift": "~",
+    "ruNoShift": "ё",
+    "ruShift": "Ё"
+  },
+  {
+    "eventCode": "Digit1",
+    "enNoShift": "1",
+    "enShift": "!",
+    "ruNoShift": "1",
+    "ruShift": "!"
+  },
+  {
+    "eventCode": "Digit2",
+    "enNoShift": "2",
+    "enShift": "@",
+    "ruNoShift": "2",
+    "ruShift": ""
+  },
+  {
+    "eventCode": "Digit3",
+    "enNoShift": "3",
+    "enShift": "#",
+    "ruNoShift": "3",
+    "ruShift": "№"
+  },
+  {
+    "eventCode": "Digit4",
+    "enNoShift": "4",
+    "enShift": "$",
+    "ruNoShift": "4",
+    "ruShift": ";"
+  },
+  {
+    "eventCode": "Digit5",
+    "enNoShift": "5",
+    "enShift": "%",
+    "ruNoShift": "5",
+    "ruShift": "%"
+  },
+  {
+    "eventCode": "Digit6",
+    "enNoShift": "6",
+    "enShift": "^",
+    "ruNoShift": "6",
+    "ruShift": ":"
+  },
+  {
+    "eventCode": "Digit7",
+    "enNoShift": "7",
+    "enShift": "&",
+    "ruNoShift": "7",
+    "ruShift": "?"
+  },
+  {
+    "eventCode": "Digit8",
+    "enNoShift": "8",
+    "enShift": "*",
+    "ruNoShift": "8",
+    "ruShift": "*"
+  },
+  {
+    "eventCode": "Digit9",
+    "enNoShift": "9",
+    "enShift": "(",
+    "ruNoShift": "9",
+    "ruShift": "("
+  },
+  {
+    "eventCode": "Digit0",
+    "enNoShift": "0",
+    "enShift": ")",
+    "ruNoShift": "0",
+    "ruShift": ")"
+  },
+  {
+    "eventCode": "Minus",
+    "enNoShift": "-",
+    "enShift": "_",
+    "ruNoShift": "-",
+    "ruShift": "_"
+  },
+  {
+    "eventCode": "Equal",
+    "enNoShift": "=",
+    "enShift": "+",
+    "ruNoShift": "=",
+    "ruShift": "+"
+  }
+]

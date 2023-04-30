@@ -58,7 +58,7 @@ function createPageHTML(){
   document.body.insertAdjacentHTML('afterbegin', 
   ` <main class="main">
   <div class="container">
-      <textarea class="keyboard-input" rows="10"></textarea>
+      <textarea autofocus class="keyboard-input" rows="5" cols="132"></textarea>
       <div class="keyboard main__keyboard">
       </div>
       <p class="information">Клавиатура создана в операционной системе Windows</p>
@@ -153,24 +153,187 @@ function changeLanguage (){
   while (keyboard.firstChild) {
     keyboard.removeChild(keyboard.firstChild);
   }
-  if(keyboardLanguage==='en'){ 
+  if(keyboardLanguage === 'en'){ 
     keyboardLanguage = 'ru'
     createKeyboard();
   } else {keyboardLanguage = 'en'
-  createKeyboard();}
+  createKeyboard();
+}
 }
 
-document.addEventListener('keydown', (event) => {
-  const keyName = event.key;
+class Stack { 
+  constructor() { 
+    this.stack = [];  
+  } 
 
-  if (keyName === 'Shift') {
+  size() { 
+   return this.stack.length; 
+  } 
+
+  showValue(){
+    return this.stack;
+  }
+
+  insert(element,position) { 
+    if(position===this.stack.length){
+      this.stack.push(element);
+    } else {
+      this.stack.splice(position,0,element)
+    }
+  }
+
+  delete(position){ 
+    if(position===this.stack.length){
+    } else {
+      this.stack.splice((position),1)
+    }
+  }
+
+  backspace(position){ 
+    this.stack.splice((position-1),1)
+    }
+ 
+  // pop() { 
+  //   return this.stack.pop(); 
+
+  // } 
+
+  // peek() { 
+  //   return this.stack[this.stack.length-1] 
+  // }
+} 
+
+let capsLock=false;
+function toggleCapsLock(){
+  if (capsLock === true){
+    capsLock=false;
+  } else {
+    capsLock=true;
+  }
+}
+
+const inputValue= new Stack()
+let position = 0;
+
+document.addEventListener('keydown', (event) => {
+  console.log(position)
+  let keyCode = event.code;
+  let input = document.querySelector('.keyboard-input');
+  let shift;
+  event.preventDefault();
+
+  if(keyCode==='Backspace') {
+    console.log(position)
+    if (position!==0){
+      inputValue.backspace(position); 
+      position--;
+      input.value = inputValue.stack.join('');
+      console.log(position)
+    }
+  }
+
+  if(keyCode==='Tab') {
+    inputValue.insert('   ', position);
+    input.value = inputValue.stack.join('');
+    position++;  
+  }
+  
+  if(keyCode==='CapsLock'){
+    toggleCapsLock();
+  }
+
+  if(keyCode==="Enter") {
+    inputValue.insert('\r\n', position);
+    input.value = inputValue.stack.join('');
+    position++;  
+  }
+
+  if(keyCode==="Delete") {
+    inputValue.delete(position);
+    input.value = inputValue.stack.join('');
+    position--;  
+  }
+
+  if(keyCode==="ArrowLeft") {
+    if(position>0){
+      position--;  
+      input.setSelectionRange(position, position);
+    }
+  }
+
+  if(keyCode==="ArrowRight") {
+    let length=inputValue.size();
+    if(position<length){
+      position++;  
+      input.setSelectionRange(position, position);
+    } 
+  }
+
+  if (keyCode === 'Shift') {
     return
   }
 
-  if (event.shiftKey && keyName === 'Alt') {
-    changeLanguage();
+  if (event.shiftKey){
+    if (keyCode === 'AltLeft' || keyCode === 'AltRight' ){
+      console.log('hvh')
+       changeLanguage();
   } 
-}, false);
+  else {
+    shift=true;
+    insertKey(keyCode, keyboardLanguage, shift, capsLock);    
+  }
+  } 
+
+  if(!event.shiftKey){
+    shift=false;
+    insertKey(keyCode, keyboardLanguage, shift, capsLock);
+  }
+
+  async function insertKey(keyCode, keyboardLanguage, shift, capsLock) { 
+    //console.log(keyCode) 
+    let inputKey;
+    const keyboardKeys = 'data.json';
+    const res = await fetch(keyboardKeys);
+    const data = await res.json();
+    if (shift === capsLock){
+      data.forEach((item)=>{
+        if(item.eventCode === keyCode){
+          if (keyboardLanguage === 'en'){
+            inputKey=item.enNoShift
+          }
+          if (keyboardLanguage === 'ru'){
+            inputKey=item.ruNoShift
+          }
+          inputValue.insert(inputKey,position);
+          input.value = inputValue.stack.join('');
+          position++;
+        }
+      })
+    } else {
+      data.forEach((item)=>{
+        if(item.eventCode === keyCode){
+          if (keyboardLanguage === 'en'){
+            inputKey=item.enShift
+          }
+          if (keyboardLanguage === 'ru'){
+            inputKey=item.ruShift
+          }
+          inputValue.insert(inputKey,position);
+          input.value = inputValue.stack.join('');
+          position++;
+        }
+      })
+    }
+  }
+  
+});
+
+
+//let inputKeysEn = []
+
+
+
+
 
 // document.addEventListener('keyup', (event) => {
 //   const keyName = event.key;
@@ -186,7 +349,9 @@ document.addEventListener('keydown', (event) => {
 // function showSymbol(){
 //   console.log(event.code)
 // }
-// let input = document.querySelector('.keyboard-input');
+// ;
 // input.addEventListener('keydown', showSymbol);
+
+
 
 
