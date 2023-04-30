@@ -1,4 +1,21 @@
-let keyboardLanguage = 'ru';
+let keyboardLanguage;
+if (localStorage.getItem('keyboardLanguage')){
+  keyboardLanguage = localStorage.getItem('keyboardLanguage');
+} else {keyboardLanguage='en'}
+
+function setLocalStorage() {
+  localStorage.setItem('keyboardLanguage', keyboardLanguage);
+}
+window.addEventListener('beforeunload', setLocalStorage)
+
+function getLocalStorage() {
+  if(localStorage.getItem('keyboardLanguage')) {
+    let keyboardLanguage = localStorage.getItem('keyboardLanguage');
+    console.log(keyboardLanguage)
+  }
+}
+window.addEventListener('onload', getLocalStorage)
+
 
 let apostrophe, bothNum1, enNum2, enNum3, enNum4, bothNum5, enNum6, enNum7, bothNum8,
     bothNum9, bothNum0, bothMinus, bothPlus, pipe, curlyBracketLeft, curlyBracketRight, colon,
@@ -43,11 +60,6 @@ function createPageHTML(){
   <div class="container">
       <textarea class="keyboard-input" rows="10"></textarea>
       <div class="keyboard main__keyboard">
-        <div class="keyboard__line"></div>
-        <div class="keyboard__line"></div>
-        <div class="keyboard__line"></div>
-        <div class="keyboard__line"></div>
-        <div class="keyboard__line"></div>
       </div>
       <p class="information">Клавиатура создана в операционной системе Windows</p>
       <p class="information">Чтобы переключить язык нажмите комбинацию клавиш <span class="text text_important">Shift + Alt</span></p>
@@ -94,10 +106,16 @@ function determineClass(item, index){
 
 
 
-let keyboardHTMLArr =[]
-
 function createKeyboard(){
-  let keyboard = document.querySelectorAll(".keyboard__line")
+  let keyboard = document.querySelector('.keyboard');
+  keyboard.insertAdjacentHTML('afterbegin', 
+  `<div class="keyboard__line"></div>
+  <div class="keyboard__line"></div>
+  <div class="keyboard__line"></div>
+  <div class="keyboard__line"></div>
+  <div class="keyboard__line"></div>`
+  )
+  let keyboardLine = document.querySelectorAll(".keyboard__line")
   if(keyboardLanguage === 'en'){
     for(let i=0; i<enKeysArr.length; i++){
       enKeysArr[i].forEach((item, index)=>{
@@ -106,7 +124,7 @@ function createKeyboard(){
             let buttonClass = determineClass(item, index);
             keyButton.className=`button ${buttonClass}`;
             keyButton.insertAdjacentHTML('afterbegin', item);
-            keyboard[i].appendChild(keyButton);
+            keyboardLine[i].appendChild(keyButton);
           }
           createKey(item, index);
       })
@@ -120,7 +138,7 @@ function createKeyboard(){
             let buttonClass = determineClass(item, index);
             keyButton.className=`button ${buttonClass}`;
             keyButton.insertAdjacentHTML('afterbegin', item);
-            keyboard[i].appendChild(keyButton);
+            keyboardLine[i].appendChild(keyButton);
           }
           createKey(item, index);
       })
@@ -128,4 +146,47 @@ function createKeyboard(){
   }
 }
 
-createKeyboard()
+setTimeout (createKeyboard, 1)
+
+function changeLanguage (){
+  let keyboard = document.querySelector('.keyboard');
+  while (keyboard.firstChild) {
+    keyboard.removeChild(keyboard.firstChild);
+  }
+  if(keyboardLanguage==='en'){ 
+    keyboardLanguage = 'ru'
+    createKeyboard();
+  } else {keyboardLanguage = 'en'
+  createKeyboard();}
+}
+
+document.addEventListener('keydown', (event) => {
+  const keyName = event.key;
+
+  if (keyName === 'Shift') {
+    return
+  }
+
+  if (event.shiftKey && keyName === 'Alt') {
+    changeLanguage();
+  } 
+}, false);
+
+// document.addEventListener('keyup', (event) => {
+//   const keyName = event.key;
+
+//   // Как только пользователь отпустит клавишу Ctrl, то она больше не будет активной.
+//   // Поэтому event.ctrlKey = false.
+//   if (keyName === 'Control') {
+//     alert('Control key was released');
+//   }
+// }, false);
+
+
+// function showSymbol(){
+//   console.log(event.code)
+// }
+// let input = document.querySelector('.keyboard-input');
+// input.addEventListener('keydown', showSymbol);
+
+
