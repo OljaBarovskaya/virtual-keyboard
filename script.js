@@ -11,7 +11,6 @@ window.addEventListener('beforeunload', setLocalStorage)
 function getLocalStorage() {
   if(localStorage.getItem('keyboardLanguage')) {
     let keyboardLanguage = localStorage.getItem('keyboardLanguage');
-    console.log(keyboardLanguage)
   }
 }
 window.addEventListener('onload', getLocalStorage)
@@ -59,6 +58,14 @@ let enKeyNumbers = ["Backquote", "Digit1", "Digit2","Digit3","Digit4","Digit5","
 let ruKeyNumbers = ["Digit1", "Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0", 
   "Minus", "Equal", "Backslash","Slash"];
 
+let keyCodesArr = [
+  ["Backquote", "Digit1", "Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0", "Minus", "Equal", "Backspace button_width_3", "Delete"],
+  ["Tab button_width_grow", "KeyQ", "KeyW", "KeyE", "KeyR","KeyT","KeyY","KeyU","KeyI","KeyO","KeyP","BracketLeft","BracketRight","Backslash"],
+  ["CapsLock button_width_3", "KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Enter button_width_grow"],
+  ["ShiftLeft button_width_grow", "KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM", "BracketLeft","BracketRight","Backslash","ArrowUp", "ShiftRight"],
+  ["ControlLeft button_width_1-5","MetaLeft","AltLeft", "Space button_width_grow","AltRight","ControlRight button_width_1-5","ArrowLeft","ArrowDown","ArrowRight"]
+]
+
 function createPageHTML(){
   document.body.insertAdjacentHTML('afterbegin', 
   ` <main class="main">
@@ -75,38 +82,10 @@ function createPageHTML(){
 createPageHTML()
 
 
-function determineClass(item, index){
-  if (item==='' && index===11){
-    return 'button_width_standard button_arrow-up';
+function determineClass(i, index){
+  let className = keyCodesArr[i][index];
+      return `button_${className}`
   }
-  if (item==='' && index===6){
-    return 'button_width_standard button_arrow-left';
-  }
-  if (item==='' && index===7){
-    return 'button_width_standard button_arrow-down';
-  }
-  if (item==='' && index===8){
-    return 'button_width_standard button_arrow-right';
-  }
-  switch (item) {
-    case 'Backspace':
-      return 'button_width_3';
-    case 'Shift ':
-        return 'button_width_grow'
-    case 'Tab':
-      return 'button_width_grow';
-    case 'Caps Lock':
-      return 'button_width_3';
-    case 'ENTER':
-      return 'button_width_grow';
-    case 'Ctrl':
-      return 'button_width_1-5';
-    case ' ':
-      return 'button_width_grow';
-    default:
-      return 'button_width_standard';
-  }
-}
 
 
 
@@ -126,7 +105,7 @@ function createKeyboard(){
       enKeysArr[i].forEach((item, index)=>{
           function createKey(item, index){
             let keyButton=document.createElement('button');
-            let buttonClass = determineClass(item, index);
+            let buttonClass = determineClass(i, index);
             keyButton.className=`button ${buttonClass}`;
             keyButton.insertAdjacentHTML('afterbegin', item);
             keyboardLine[i].appendChild(keyButton);
@@ -140,7 +119,7 @@ function createKeyboard(){
       ruKeysArr[i].forEach((item, index)=>{
           function createKey(item, index){
             let keyButton=document.createElement('button');
-            let buttonClass = determineClass(item, index);
+            let buttonClass = determineClass(i, index);
             keyButton.className=`button ${buttonClass}`;
             keyButton.insertAdjacentHTML('afterbegin', item);
             keyboardLine[i].appendChild(keyButton);
@@ -228,12 +207,10 @@ document.addEventListener('keydown', (event) => {
   event.preventDefault();
 
   if(keyCode==='Backspace') {
-    console.log(position)
     if (position!==0){
       inputValue.backspace(position); 
       position--;
       input.value = inputValue.stack.join('');
-      console.log(position)
     }
   }
 
@@ -286,7 +263,6 @@ document.addEventListener('keydown', (event) => {
 
   if (event.shiftKey){
     if (keyCode === 'AltLeft' || keyCode === 'AltRight' ){
-      console.log('hvh')
        changeLanguage();
   } 
   else {
