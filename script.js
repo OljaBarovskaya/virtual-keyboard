@@ -74,7 +74,7 @@ function createPageHTML(){
   document.body.insertAdjacentHTML('afterbegin', 
   ` <main class="main">
   <div class="container">
-      <textarea autofocus class="keyboard-input" rows="5" cols="132"></textarea>
+      <textarea autofocus class="keyboard-input" rows="5" cols="69"></textarea>
       <div class="keyboard main__keyboard">
       </div>
       <p class="information">Клавиатура создана в операционной системе Windows</p>
