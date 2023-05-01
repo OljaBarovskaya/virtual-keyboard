@@ -66,6 +66,10 @@ let keyCodesArr = [
   ["ControlLeft button_width_1-5","MetaLeft","AltLeft", "Space button_width_grow","AltRight","ControlRight button_width_1-5","ArrowLeft","ArrowDown","ArrowRight"]
 ]
 
+ // ["CapsLock button_width_3", "KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Enter button_width_grow"],
+  // ["ShiftLeft button_width_grow", "KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM", "BracketLeft","BracketRight","Backslash","ArrowUp", "ShiftRight"],
+  // ["ControlLeft button_width_1-5","MetaLeft","AltLeft", "Space button_width_grow","AltRight","ControlRight button_width_1-5","ArrowLeft","ArrowDown","ArrowRight"]
+
 function createPageHTML(){
   document.body.insertAdjacentHTML('afterbegin', 
   ` <main class="main">
@@ -200,11 +204,26 @@ const inputValue= new Stack()
 let position = 0;
 
 document.addEventListener('keydown', (event) => {
-  console.log(position)
   let keyCode = event.code;
   let input = document.querySelector('.keyboard-input');
   let shift;
   event.preventDefault();
+
+  let button = document.querySelectorAll(".button")
+  button.forEach ((item)=>{
+    if(item.classList.contains(`button_${keyCode}`)){
+
+      item.classList.add('button_pressed');
+      
+      document.addEventListener('keyup', ()=>{
+        item.classList.remove('button_pressed');
+        document.removeEventListener('keyup', ()=>{
+          item.classList.remove('button_pressed')
+        });
+      })
+        
+    }
+  })
 
   if(keyCode==='Backspace') {
     if (position!==0){
@@ -233,7 +252,7 @@ document.addEventListener('keydown', (event) => {
   if(keyCode==="Delete") {
     inputValue.delete(position);
     input.value = inputValue.stack.join('');
-    position--;  
+    input.setSelectionRange(position, position); 
   }
 
   if(keyCode==="ArrowLeft") {
