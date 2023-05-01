@@ -54,6 +54,11 @@ let ruKeysArr = [
                   ['Ctrl','Win','Alt',' ','Alt','Ctrl',arrowLeft,arrowDown,arrowRight]
                 ]
 
+let enKeyNumbers = ["Backquote", "Digit1", "Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9",
+  "Digit0", "Minus", "Equal", "BracketLeft","BracketRight","Backslash","Semicolon","Quote","Comma","Period","Slash"];
+let ruKeyNumbers = ["Digit1", "Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0", 
+  "Minus", "Equal", "Backslash","Slash"];
+
 function createPageHTML(){
   document.body.insertAdjacentHTML('afterbegin', 
   ` <main class="main">
@@ -290,12 +295,15 @@ document.addEventListener('keydown', (event) => {
   }
 
   async function insertKey(keyCode, keyboardLanguage, shift, capsLock) { 
-    //console.log(keyCode) 
     let inputKey;
+    let cL=capsLock;
     const keyboardKeys = 'data.json';
     const res = await fetch(keyboardKeys);
     const data = await res.json();
-    if (shift === capsLock){
+    if ((keyboardLanguage === 'en' && enKeyNumbers.includes(keyCode)) || (keyboardLanguage === 'ru' && ruKeyNumbers.includes(keyCode))){
+      cL=false;
+    }
+    if (shift === cL){
       data.forEach((item)=>{
         if(item.eventCode === keyCode){
           if (keyboardLanguage === 'en'){
