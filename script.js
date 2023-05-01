@@ -206,10 +206,13 @@ const inputValue= new Stack()
 let position = 0;
 
 document.addEventListener('keydown', (event) => {
+  if(!(event.altKey || event.ctrlKey || event.metaKey)){
   let keyCode = event.code;
   let input = document.querySelector('.keyboard-input');
   let shift;
+
   event.preventDefault();
+  
 
   let button = document.querySelectorAll(".button")
   button.forEach ((item)=>{
@@ -343,7 +346,7 @@ document.addEventListener('keydown', (event) => {
       })
     }
   }
-  
+} 
 });
 
 
