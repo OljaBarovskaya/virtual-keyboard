@@ -89,5 +89,98 @@
     "enShift": "+",
     "ruNoShift": "=",
     "ruShift": "+"
+  },
+  {
+    "eventCode": "KeyQ",
+    "enNoShift": "q",
+    "enShift": "Q",
+    "ruNoShift": "й",
+    "ruShift": "Й"
+  },
+  {
+    "eventCode": "KeyW",
+    "enNoShift": "w",
+    "enShift": "W",
+    "ruNoShift": "ц",
+    "ruShift": "Ц"
+  },
+  {
+    "eventCode": "KeyE",
+    "enNoShift": "e",
+    "enShift": "E",
+    "ruNoShift": "у",
+    "ruShift": "У"
+  },
+  {
+    "eventCode": "KeyR",
+    "enNoShift": "r",
+    "enShift": "R",
+    "ruNoShift": "к",
+    "ruShift": "К"
+  },
+  {
+    "eventCode": "KeyT",
+    "enNoShift": "t",
+    "enShift": "T",
+    "ruNoShift": "е",
+    "ruShift": "Е"
+  },
+  {
+    "eventCode": "KeyY",
+    "enNoShift": "y",
+    "enShift": "Y",
+    "ruNoShift": "н",
+    "ruShift": "Н"
+  },
+  {
+    "eventCode": "KeyU",
+    "enNoShift": "u",
+    "enShift": "U",
+    "ruNoShift": "г",
+    "ruShift": "Г"
+  },
+  {
+    "eventCode": "KeyI",
+    "enNoShift": "i",
+    "enShift": "I",
+    "ruNoShift": "ш",
+    "ruShift": "Ш"
+  },
+  {
+    "eventCode": "KeyO",
+    "enNoShift": "o",
+    "enShift": "O",
+    "ruNoShift": "щ",
+    "ruShift": "Щ"
+  },
+  {
+    "eventCode": "KeyP",
+    "enNoShift": "p",
+    "enShift": "P",
+    "ruNoShift": "з",
+    "ruShift": "З"
+  },
+  {
+    "eventCode": "BracketLeft",
+    "enNoShift": "[",
+    "enShift": "{",
+    "ruNoShift": "х",
+    "ruShift": "Х"
+  },
+  {
+    "eventCode": "BracketRight",
+    "enNoShift": "]",
+    "enShift": "}",
+    "ruNoShift": "ъ",
+    "ruShift": "Ъ"
+  },
+  {
+    "eventCode": "Backslash",
+    "enNoShift": "\\",
+    "enShift": "|",
+    "ruNoShift": "\\",
+    "ruShift": "/"
   }
+
+
 ]
