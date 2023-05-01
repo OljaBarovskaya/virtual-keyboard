@@ -58,12 +58,14 @@ let enKeyNumbers = ["Backquote", "Digit1", "Digit2","Digit3","Digit4","Digit5","
 let ruKeyNumbers = ["Digit1", "Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0", 
   "Minus", "Equal", "Backslash","Slash"];
 
+
+
 let keyCodesArr = [
-  ["Backquote", "Digit1", "Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0", "Minus", "Equal", "Backspace button_width_3", "Delete"],
-  ["Tab button_width_grow", "KeyQ", "KeyW", "KeyE", "KeyR","KeyT","KeyY","KeyU","KeyI","KeyO","KeyP","BracketLeft","BracketRight","Backslash"],
-  ["CapsLock button_width_3", "KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Enter button_width_grow"],
-  ["ShiftLeft button_width_grow", "KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM", "BracketLeft","BracketRight","Backslash","ArrowUp", "ShiftRight"],
-  ["ControlLeft button_width_1-5","MetaLeft","AltLeft", "Space button_width_grow","AltRight","ControlRight button_width_1-5","ArrowLeft","ArrowDown","ArrowRight"]
+  ["Backquote", "Digit1", "Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0", "Minus", "Equal", "Backspace", "Delete"],
+  ["Tab", "KeyQ", "KeyW", "KeyE", "KeyR","KeyT","KeyY","KeyU","KeyI","KeyO","KeyP","BracketLeft","BracketRight","Backslash"],
+  ["CapsLock", "KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Enter"],
+  ["ShiftLeft", "KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM", "BracketLeft","BracketRight","Slash","ArrowUp", "ShiftRight"],
+  ["ControlLeft","MetaLeft","AltLeft", "Space","AltRight","ControlRight","ArrowLeft","ArrowDown","ArrowRight"]
 ]
 
  // ["CapsLock button_width_3", "KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Enter button_width_grow"],
@@ -214,13 +216,16 @@ document.addEventListener('keydown', (event) => {
     if(item.classList.contains(`button_${keyCode}`)){
 
       item.classList.add('button_pressed');
+      item.classList.add('button_active');
       
       document.addEventListener('keyup', (event)=>{
         let keyCode2=event.code;
         if(item.classList.contains(`button_${keyCode2}`)){
           item.classList.remove('button_pressed');
+          item.classList.remove('button_active');
           document.removeEventListener('keyup', ()=>{
-            item.classList.remove('button_pressed')
+            item.classList.remove('button_pressed');
+            item.classList.remove('button_active');
           });
         }
        
@@ -340,6 +345,163 @@ document.addEventListener('keydown', (event) => {
   }
   
 });
+
+
+
+
+
+document.addEventListener('click', (event) => {
+  let targetKey = event.target;
+  console.log(position)
+  let input = document.querySelector('.keyboard-input');
+  let shift;
+  // event.preventDefault();
+
+
+    for (let i=0; i<keyCodesArr.length; i++){
+      keyCodesArr[i].forEach((item)=>{
+        if (targetKey.classList.contains(`button_${item}`)){
+console.log(item)
+if(item === 'Backspace') {
+    if (position!==0){
+      inputValue.backspace(position); 
+      position--;
+      input.value = inputValue.stack.join('');
+    }
+  }
+
+  if(item==='Tab') {
+    inputValue.insert('   ', position);
+    console.log(inputValue.stack.join(''))
+    input.value = inputValue.stack.join('');
+    position++;  
+  }
+  
+  if(item==='CapsLock'){
+    toggleCapsLock();
+  }
+
+  if(item==="Enter") {
+    inputValue.insert('\r\n', position);
+    input.value = inputValue.stack.join('');
+    position++;  
+  }
+
+  if(item==="Delete") {
+    inputValue.delete(position);
+    input.value = inputValue.stack.join('');
+    input.setSelectionRange(position, position); 
+  }
+
+  if(item==="ArrowLeft") {
+    if(position>0){
+      position--;  
+      input.setSelectionRange(position, position);
+    }
+  }
+
+  if(item==="ArrowRight") {
+    let length=inputValue.size();
+    if(position<length){
+      position++;  
+      input.setSelectionRange(position, position);
+    } 
+  }
+
+  if(item==="Space"){
+    inputValue.insert(' ', position);
+    input.value = inputValue.stack.join('');
+    position++;  
+  }
+
+  if (item === 'Shift') {
+    return
+  }
+
+  if (event.shiftKey){
+    if (item === 'AltLeft' || item === 'AltRight' ){
+       changeLanguage();
+  } 
+  else {
+    shift=true;
+    insertKey(item, keyboardLanguage, shift, capsLock);    
+  }
+  } 
+
+  if(!event.shiftKey){
+    console.log('hj')
+    shift=false;
+    insertKey(item, keyboardLanguage, shift, capsLock);
+  }
+
+          async function insertKey(item, keyboardLanguage, shift, capsLock) { 
+            let inputKey;
+            let cL=capsLock;
+            const keyboardKeys = 'data.json';
+            const res = await fetch(keyboardKeys);
+            const data = await res.json();
+            if ((keyboardLanguage === 'en' && enKeyNumbers.includes(item)) || (keyboardLanguage === 'ru' && ruKeyNumbers.includes(item))){
+              cL=false;
+            }
+            if (shift === cL){
+              data.forEach((element)=>{
+                if(element.eventCode === item){
+                  if (keyboardLanguage === 'en'){
+                    inputKey=element.enNoShift
+                  }
+                  if (keyboardLanguage === 'ru'){
+                    inputKey=element.ruNoShift
+                  }
+                  inputValue.insert(inputKey,position);
+                  input.value = inputValue.stack.join('');
+                  position++;
+                }
+              })
+            } else {
+              data.forEach((element)=>{
+                if(element.eventCode === item){
+                  if (keyboardLanguage === 'en'){
+                    inputKey=element.enShift
+                  }
+                  if (keyboardLanguage === 'ru'){
+                    inputKey=element.ruShift
+                  }
+                  inputValue.insert(inputKey,position);
+                  input.value = inputValue.stack.join('');
+                  position++;
+                }
+              })
+            }
+          }
+        }
+      })
+    }
+    
+    input.setSelectionRange(position, position);
+    input.focus();
+  }
+)
+
+  //     item.classList.add('button_pressed');
+      
+  //     document.addEventListener('keyup', (event)=>{
+  //       let keyCode2=event.code;
+  //       if(item.classList.contains(`button_${keyCode2}`)){
+  //         item.classList.remove('button_pressed');
+  //         document.removeEventListener('keyup', ()=>{
+  //           item.classList.remove('button_pressed')
+  //         });
+  //       }
+       
+  //     })
+        
+  //   }
+  // })
+
+  
+
+
+
 
 
 //let inputKeysEn = []

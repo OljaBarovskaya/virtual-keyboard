@@ -58,21 +58,35 @@ column-gap: 5px;
   height: 60px;
   font-size: 20px;
   width: 60px;
+  box-shadow: 5px -5px 5px rgb(78, 78, 78);
+  transition-property:all;
+  transition-duration: .3s;
 }
 
-.button_width_1-5 {
+.button:active {
+  transform: translate(4px, -4px);
+  box-shadow: 1px -1px 5px rgb(51, 50, 50);
+}
+
+.button_active {
+  transform: translate(4px, -4px);
+  box-shadow: 1px -1px 1px rgb(51, 50, 50);
+}
+
+.button_ControlRight,
+.button_ControlLeft {
   width: calc(60px*1.5);
 }
 
-.button_width_2 {
-  width: calc(60px*2);
-}
-
-.button_width_3 {
+.button_CapsLock,
+.button_Backspace {
   width: calc(60px*3);
 }
 
-.button_width_grow {
+.button_Tab,
+.button_ShiftLeft,
+.button_Space,
+.button_Enter {
   flex-grow: 1;
 }
 
