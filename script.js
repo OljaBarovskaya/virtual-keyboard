@@ -215,11 +215,15 @@ document.addEventListener('keydown', (event) => {
 
       item.classList.add('button_pressed');
       
-      document.addEventListener('keyup', ()=>{
-        item.classList.remove('button_pressed');
-        document.removeEventListener('keyup', ()=>{
-          item.classList.remove('button_pressed')
-        });
+      document.addEventListener('keyup', (event)=>{
+        let keyCode2=event.code;
+        if(item.classList.contains(`button_${keyCode2}`)){
+          item.classList.remove('button_pressed');
+          document.removeEventListener('keyup', ()=>{
+            item.classList.remove('button_pressed')
+          });
+        }
+       
       })
         
     }
