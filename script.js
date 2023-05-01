@@ -68,10 +68,6 @@ let keyCodesArr = [
   ["ControlLeft","MetaLeft","AltLeft", "Space","AltRight","ControlRight","ArrowLeft","ArrowDown","ArrowRight"]
 ]
 
- // ["CapsLock button_width_3", "KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Enter button_width_grow"],
-  // ["ShiftLeft button_width_grow", "KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM", "BracketLeft","BracketRight","Backslash","ArrowUp", "ShiftRight"],
-  // ["ControlLeft button_width_1-5","MetaLeft","AltLeft", "Space button_width_grow","AltRight","ControlRight button_width_1-5","ArrowLeft","ArrowDown","ArrowRight"]
-
 function createPageHTML(){
   document.body.insertAdjacentHTML('afterbegin', 
   ` <main class="main">

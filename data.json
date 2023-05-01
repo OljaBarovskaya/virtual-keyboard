@@ -180,7 +180,156 @@
     "enShift": "|",
     "ruNoShift": "\\",
     "ruShift": "/"
+  },
+  {
+    "eventCode": "KeyA",
+    "enNoShift": "a",
+    "enShift": "A",
+    "ruNoShift": "ф",
+    "ruShift": "Ф"
+  },
+  {
+    "eventCode": "KeyS",
+    "enNoShift": "s",
+    "enShift": "S",
+    "ruNoShift": "ы",
+    "ruShift": "Ы"
+  },
+  {
+    "eventCode": "KeyD",
+    "enNoShift": "d",
+    "enShift": "D",
+    "ruNoShift": "в",
+    "ruShift": "В"
+  },
+  {
+    "eventCode": "KeyF",
+    "enNoShift": "f",
+    "enShift": "F",
+    "ruNoShift": "а",
+    "ruShift": "А"
+  },
+  {
+    "eventCode": "KeyG",
+    "enNoShift": "g",
+    "enShift": "G",
+    "ruNoShift": "п",
+    "ruShift": "П"
+  },
+  {
+    "eventCode": "KeyH",
+    "enNoShift": "h",
+    "enShift": "H",
+    "ruNoShift": "р",
+    "ruShift": "Р"
+  },
+  {
+    "eventCode": "KeyJ",
+    "enNoShift": "j",
+    "enShift": "J",
+    "ruNoShift": "о",
+    "ruShift": "О"
+  },
+  {
+    "eventCode": "KeyK",
+    "enNoShift": "k",
+    "enShift": "K",
+    "ruNoShift": "л",
+    "ruShift": "Л"
+  },
+  {
+    "eventCode": "KeyL",
+    "enNoShift": "l",
+    "enShift": "L",
+    "ruNoShift": "д",
+    "ruShift": "Д"
+  },
+  {
+    "eventCode": "Semicolon",
+    "enNoShift": ";",
+    "enShift": ":",
+    "ruNoShift": "ж",
+    "ruShift": "Ж"
+  },
+  {
+    "eventCode": "Quote",
+    "enNoShift": "'",
+    "enShift": "\"",
+    "ruNoShift": "э",
+    "ruShift": "Э"
+  },
+  {
+    "eventCode": "KeyZ",
+    "enNoShift": "z",
+    "enShift": "Z",
+    "ruNoShift": "я",
+    "ruShift": "Я"
+  },
+  {
+    "eventCode": "KeyX",
+    "enNoShift": "x",
+    "enShift": "X",
+    "ruNoShift": "ч",
+    "ruShift": "Ч"
+  },
+  {
+    "eventCode": "KeyC",
+    "enNoShift": "c",
+    "enShift": "C",
+    "ruNoShift": "с",
+    "ruShift": "С"
+  },
+  {
+    "eventCode": "KeyV",
+    "enNoShift": "v",
+    "enShift": "V",
+    "ruNoShift": "м",
+    "ruShift": "М"
+  },
+  {
+    "eventCode": "KeyB",
+    "enNoShift": "b",
+    "enShift": "B",
+    "ruNoShift": "и",
+    "ruShift": "И"
+  },
+  {
+    "eventCode": "KeyN",
+    "enNoShift": "n",
+    "enShift": "N",
+    "ruNoShift": "т",
+    "ruShift": "Т"
+  },
+  {
+    "eventCode": "KeyM",
+    "enNoShift": "m",
+    "enShift": "M",
+    "ruNoShift": "ь",
+    "ruShift": "Ь"
+  },
+  {
+    "eventCode": "BracketLeft",
+    "enNoShift": ",",
+    "enShift": "<",
+    "ruNoShift": "б",
+    "ruShift": "Б"
+  },
+  {
+    "eventCode": "BracketRight",
+    "enNoShift": ".",
+    "enShift": ">",
+    "ruNoShift": "ю",
+    "ruShift": "Ю"
+  },
+  {
+    "eventCode": "Backslash",
+    "enNoShift": "/",
+    "enShift": "?",
+    "ruNoShift": ".",
+    "ruShift": ","
   }
 
-
 ]
+
+
+ 
