@@ -274,6 +274,12 @@ document.addEventListener('keydown', (event) => {
     } 
   }
 
+  if(keyCode==="Space"){
+    inputValue.insert(' ', position);
+    input.value = inputValue.stack.join('');
+    position++;  
+  }
+
   if (keyCode === 'Shift') {
     return
   }
