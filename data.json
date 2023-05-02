@@ -322,7 +322,7 @@
     "ruShift": "Ю"
   },
   {
-    "eventCode": "Backslash",
+    "eventCode": "Slash",
     "enNoShift": "/",
     "enShift": "?",
     "ruNoShift": ".",
