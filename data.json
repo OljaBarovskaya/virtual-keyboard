@@ -327,6 +327,34 @@
     "enShift": "?",
     "ruNoShift": ".",
     "ruShift": ","
+  },
+  {
+    "eventCode": "ArrowUp",
+    "enNoShift": "▲",
+    "enShift": "▲",
+    "ruNoShift": "▲",
+    "ruShift": "▲"
+  },
+  {
+    "eventCode": "ArrowLeft",
+    "enNoShift": "◄",
+    "enShift": "◄",
+    "ruNoShift": "◄",
+    "ruShift": "◄"
+  },
+  {
+    "eventCode": "ArrowDown",
+    "enNoShift": "►",
+    "enShift": "►",
+    "ruNoShift": "►",
+    "ruShift": "►"
+  },
+  {
+    "eventCode": "ArrowRight",
+    "enNoShift": "▼",
+    "enShift": "▼",
+    "ruNoShift": "▼",
+    "ruShift": "▼"
   }
 
 ]

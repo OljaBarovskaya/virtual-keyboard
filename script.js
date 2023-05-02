@@ -59,10 +59,9 @@ let ruKeyNumbers = ["Digit1", "Digit2","Digit3","Digit4","Digit5","Digit6","Digi
   "Minus", "Equal", "Backslash","Slash"];
 
 
-
 let keyCodesArr = [
   ["Backquote", "Digit1", "Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0", "Minus", "Equal", "Backspace", "Delete"],
-  ["Tab", "KeyQ", "KeyW", "KeyE", "KeyR","KeyT","KeyY","KeyU","KeyI","KeyO","KeyP","BracketLeft","BracketRight","Backslash"],
+  ["Tab", "KeyQ", "KeyW", "KeyE", "KeyR","KeyT","KeyY","KeyU","KeyI","KeyO","KeyP","BracketLeft","BracketRight","Backslash","Delete"],
   ["CapsLock", "KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Enter"],
   ["ShiftLeft", "KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM", "BracketLeft","BracketRight","Slash","ArrowUp", "ShiftRight"],
   ["ControlLeft","MetaLeft","AltLeft", "Space","AltRight","ControlRight","ArrowLeft","ArrowDown","ArrowRight"]
@@ -178,15 +177,7 @@ class Stack {
   backspace(position){ 
     this.stack.splice((position-1),1)
     }
- 
-  // pop() { 
-  //   return this.stack.pop(); 
 
-  // } 
-
-  // peek() { 
-  //   return this.stack[this.stack.length-1] 
-  // }
 } 
 
 let capsLock=false;
@@ -202,15 +193,12 @@ const inputValue= new Stack()
 let position = 0;
 
 document.addEventListener('keydown', (event) => {
-  if(!(event.altKey || event.ctrlKey || event.metaKey)){
+
   let keyCode = event.code;
   let input = document.querySelector('.keyboard-input');
   let shift;
-
-  event.preventDefault();
-  
-
   let button = document.querySelectorAll(".button")
+
   button.forEach ((item)=>{
     if(item.classList.contains(`button_${keyCode}`)){
 
@@ -232,6 +220,20 @@ document.addEventListener('keydown', (event) => {
         
     }
   })
+
+  if (keyCode === 'Shift') {
+    return
+  }
+
+  if (event.shiftKey){
+    if (keyCode === 'AltLeft' || keyCode === 'AltRight' ){
+       changeLanguage();
+    } 
+  }
+
+  if(!(event.altKey || event.ctrlKey || event.metaKey)){
+
+  event.preventDefault();
 
   if(keyCode==='Backspace') {
     if (position!==0){
@@ -260,23 +262,23 @@ document.addEventListener('keydown', (event) => {
   if(keyCode==="Delete") {
     inputValue.delete(position);
     input.value = inputValue.stack.join('');
-    input.setSelectionRange(position, position); 
+   // input.setSelectionRange(position, position); 
   }
 
-  if(keyCode==="ArrowLeft") {
-    if(position>0){
-      position--;  
-      input.setSelectionRange(position, position);
-    }
-  }
+  // if(keyCode==="ArrowLeft") {
+  //   if(position>0){
+  //     position--;  
+  //     input.setSelectionRange(position, position);
+  //   }
+  // }
 
-  if(keyCode==="ArrowRight") {
-    let length=inputValue.size();
-    if(position<length){
-      position++;  
-      input.setSelectionRange(position, position);
-    } 
-  }
+  // if(keyCode==="ArrowRight") {
+  //   let length=inputValue.size();
+  //   if(position<length){
+  //     position++;  
+  //     input.setSelectionRange(position, position);
+  //   } 
+  // }
 
   if(keyCode==="Space"){
     inputValue.insert(' ', position);
@@ -289,14 +291,9 @@ document.addEventListener('keydown', (event) => {
   }
 
   if (event.shiftKey){
-    if (keyCode === 'AltLeft' || keyCode === 'AltRight' ){
-       changeLanguage();
-  } 
-  else {
     shift=true;
     insertKey(keyCode, keyboardLanguage, shift, capsLock);    
   }
-  } 
 
   if(!event.shiftKey){
     shift=false;
@@ -343,6 +340,7 @@ document.addEventListener('keydown', (event) => {
     }
   }
 } 
+
 });
 
 
@@ -350,8 +348,11 @@ document.addEventListener('keydown', (event) => {
 
 
 document.addEventListener('click', (event) => {
+  console.log(event.pageX)
+  console.log(event.pageY)
+  console.log(event.target)
   let targetKey = event.target;
-  console.log(position)
+  //console.log(position)
   let input = document.querySelector('.keyboard-input');
   let shift;
   // event.preventDefault();
@@ -359,9 +360,8 @@ document.addEventListener('click', (event) => {
 
     for (let i=0; i<keyCodesArr.length; i++){
       keyCodesArr[i].forEach((item)=>{
-        if (targetKey.classList.contains(`button_${item}`)){
-console.log(item)
-if(item === 'Backspace') {
+        if (targetKey.classList.contains(`button_${item}`) || targetKey.parentElement.classList.contains(`button_${item}`)){
+  if(item === 'Backspace') {
     if (position!==0){
       inputValue.backspace(position); 
       position--;
@@ -371,7 +371,6 @@ if(item === 'Backspace') {
 
   if(item==='Tab') {
     inputValue.insert('   ', position);
-    console.log(inputValue.stack.join(''))
     input.value = inputValue.stack.join('');
     position++;  
   }
@@ -392,20 +391,20 @@ if(item === 'Backspace') {
     input.setSelectionRange(position, position); 
   }
 
-  if(item==="ArrowLeft") {
-    if(position>0){
-      position--;  
-      input.setSelectionRange(position, position);
-    }
-  }
+  // if(item==="ArrowLeft") {
+  //   if(position>0){
+  //     position--;  
+  //     input.setSelectionRange(position, position);
+  //   }
+  // }
 
-  if(item==="ArrowRight") {
-    let length=inputValue.size();
-    if(position<length){
-      position++;  
-      input.setSelectionRange(position, position);
-    } 
-  }
+  // if(item==="ArrowRight") {
+  //   let length=inputValue.size();
+  //   if(position<length){
+  //     position++;  
+  //     input.setSelectionRange(position, position);
+  //   } 
+  // }
 
   if(item==="Space"){
     inputValue.insert(' ', position);
@@ -428,7 +427,6 @@ if(item === 'Backspace') {
   } 
 
   if(!event.shiftKey){
-    console.log('hj')
     shift=false;
     insertKey(item, keyboardLanguage, shift, capsLock);
   }
@@ -480,51 +478,6 @@ if(item === 'Backspace') {
     input.focus();
   }
 )
-
-  //     item.classList.add('button_pressed');
-      
-  //     document.addEventListener('keyup', (event)=>{
-  //       let keyCode2=event.code;
-  //       if(item.classList.contains(`button_${keyCode2}`)){
-  //         item.classList.remove('button_pressed');
-  //         document.removeEventListener('keyup', ()=>{
-  //           item.classList.remove('button_pressed')
-  //         });
-  //       }
-       
-  //     })
-        
-  //   }
-  // })
-
-  
-
-
-
-
-
-//let inputKeysEn = []
-
-
-
-
-
-// document.addEventListener('keyup', (event) => {
-//   const keyName = event.key;
-
-//   // Как только пользователь отпустит клавишу Ctrl, то она больше не будет активной.
-//   // Поэтому event.ctrlKey = false.
-//   if (keyName === 'Control') {
-//     alert('Control key was released');
-//   }
-// }, false);
-
-
-// function showSymbol(){
-//   console.log(event.code)
-// }
-// ;
-// input.addEventListener('keydown', showSymbol);
 
 
 
