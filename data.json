@@ -308,14 +308,14 @@
     "ruShift": "Ь"
   },
   {
-    "eventCode": "BracketLeft",
+    "eventCode": "Comma",
     "enNoShift": ",",
     "enShift": "<",
     "ruNoShift": "б",
     "ruShift": "Б"
   },
   {
-    "eventCode": "BracketRight",
+    "eventCode": "Period",
     "enNoShift": ".",
     "enShift": ">",
     "ruNoShift": "ю",
